@@ -24,7 +24,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
-
+        
+      - name: 'Create env file'
+        shell: bash
+        run: |
+          echo ${{ secrets.PROD }} | base64 --decode > .env 
+          
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
         run: |
