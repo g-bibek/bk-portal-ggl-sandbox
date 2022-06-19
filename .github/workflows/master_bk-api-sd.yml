@@ -43,6 +43,12 @@ jobs:
           # npm run test --if-present
           popd
 
+      - name: 'Copy Function Json file'
+        shell: bash
+        run: |
+          cat main/function.json
+          cp main/function.json dist/main/function.json
+
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
         id: fa
