@@ -28,6 +28,7 @@ jobs:
       - name: 'Create env file'
         shell: bash
         run: |
+          touch .env
           echo ${{secrets}}
           echo ${{ secrets.PROD }} | base64 --decode > echo  .env 
           cat .env
