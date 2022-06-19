@@ -8,9 +8,9 @@ generator client {
   // previewFeatures = []
 }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
-}
+// generator dbml {
+//   provider = "prisma-dbml-generator"
+// }
 
 generator nestgraphql {
   provider             = "prisma-nestjs-graphql"
