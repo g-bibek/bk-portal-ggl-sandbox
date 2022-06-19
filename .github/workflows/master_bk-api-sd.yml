@@ -54,6 +54,11 @@ jobs:
         run: |
           Get-ChildItem $pwd | Compress-Archive -Destination .\backend.zip
         shell: pwsh
+      
+      - name: File Size
+        run: |
+            FILESIZE=$(ls -lah backend.zip | awk '{ print $5}')
+            echo "Filesize is $FILESIZE"
 
       - name: 'Deploy the ZIP to the app'
         uses: azure/webapps-deploy@v2
