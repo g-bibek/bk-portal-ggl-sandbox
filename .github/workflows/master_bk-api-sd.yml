@@ -59,7 +59,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'bk-api-sd'
-          publish-profile: ${{ secrets.AZURE_FUNCTIONAPP_PUBLISH_PROFILE_DEV }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF9A258D91BE4A2F99245511FD469C13  }}
           package: ./backend.zip
 
 #       - name: 'Run Azure Functions Action'
