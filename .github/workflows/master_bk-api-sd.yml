@@ -25,13 +25,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: 'Create env file'
-        shell: bash
-        run: |
-          touch .env
-          echo ${{secrets}}
-          echo ${{ secrets.PROD }} | base64 --decode > echo  .env 
-          cat .env
+#       - name: 'Create env file'
+#         shell: bash
+#         run: |
+#           touch .env
+#           echo ${{secrets}}
+#           echo ${{ secrets.PROD }} | base64 --decode > echo  .env 
+#           cat .env
 
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
