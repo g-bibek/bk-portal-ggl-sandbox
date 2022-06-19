@@ -12,22 +12,22 @@ import config from '../src/common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
 import { RolesModule } from './roles/roles.module';
-
+import { loggingMiddleware } from './common/middleware/logging.middleware';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, load: [config] }),
-    PrismaModule.forRootAsync({
+    PrismaModule.forRoot({
       isGlobal: true,
-      // prismaServiceOptions: {
-      //   middlewares: [loggingMiddleware()], // configure your prisma middleware
-      // },
+      prismaServiceOptions: {
+        middlewares: [loggingMiddleware()], // configure your prisma middleware
+      },
 
-      useFactory: () => ({
-        prismaOptions: {
-          log: ['info', 'query'],
-        },
-        explicitConnect: false,
-      }),
+      // useFactory: () => ({
+      //   prismaOptions: {
+      //     log: ['info', 'query'],
+      //   },
+      //   explicitConnect: false,
+      // }),
     }),
 
     GraphQLModule.forRootAsync<ApolloDriverConfig>({
