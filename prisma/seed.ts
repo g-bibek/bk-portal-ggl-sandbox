@@ -34,6 +34,7 @@ async function main() {
       email: 'lisa@simpson.com',
       firstname: 'Lisa',
       lastname: 'Simpson',
+      status: 'VALIDATED',
       password: '$2b$10$EpRnTzVlqHNP0.fUbXUwSOyuiXe/QLSUG6xNekdHgTGmrpHEfIoxm', // secret42
       role: {
         connect: {
@@ -47,6 +48,22 @@ async function main() {
       email: 'bart@simpson.com',
       firstname: 'Bart',
       lastname: 'Simpson',
+      status: 'VALIDATED',
+      role: {
+        connect: {
+          name: adminRole.name,
+        },
+      },
+      password: '$2b$10$EpRnTzVlqHNP0.fUbXUwSOyuiXe/QLSUG6xNekdHgTGmrpHEfIoxm', // secret42F
+    },
+  });
+
+  const user3 = await prisma.user.create({
+    data: {
+      email: 'homer@simpson.com',
+      firstname: 'Homer',
+      lastname: 'Simpson',
+      status: 'VALIDATION_PENDING',
       role: {
         connect: {
           name: adminRole.name,
