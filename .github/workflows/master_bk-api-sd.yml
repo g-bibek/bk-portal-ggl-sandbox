@@ -48,7 +48,7 @@ jobs:
         run: |
           cat main/function.json
           cp main/function.json dist/main/function.json
-          cat dist/main/functions.json
+          cat dist/main/function.json
 
         # You can also make use of a ZIP GitHub Action
       - name: 'Create ZIP'
