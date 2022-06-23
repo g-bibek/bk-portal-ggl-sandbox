@@ -27,11 +27,9 @@ jobs:
           
       - name: 'Create .Env File'
         shell: pwsh
-        env:
-          SUPER_SECRET: ${{ secrets.PRODWIN }}
         run: |
-          Write-Output ${{ secrets.PRODWIN }}
-          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(${{ secrets.PRODWIN }})) | Out-File -FilePath .env                  
+          echo "$env:PRODWIN"
+          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$env:PRODWIN")) | Out-File -FilePath .env                  
           get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
