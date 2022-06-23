@@ -26,12 +26,10 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           
       - name: 'Create .Env File'
-        id: write_file
-        uses: timheuer/base64-to-file@v1.1
-        with:
-          fileName: '.env'
-          fileDir: './'
-          encodedString: ${{ secrets.SOME_ENCODED_STRING }}
+        shell: pwsh
+        run: |
+          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(${{secrets.SOME_ENCODED_STRING}})) | Out-File -FilePath .env                  
+          get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
         shell: pwsh
@@ -47,7 +45,6 @@ jobs:
         run: |
           cp main/function.json dist/main/function.json
           get-content dist/main/function.json
-          get-content .env
 
 
       - name: 'Run Azure Functions Action'
