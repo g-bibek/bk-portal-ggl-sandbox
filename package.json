@@ -22,7 +22,7 @@
   "scripts": {
     "ttt": "rimraf dist && tsc -p tsconfig.build.json",
     "prebuild": "rimraf dist",
-    "build": "nest build && npm run copy-azure-settings",
+    "build": "nest build",
     "copy-azure-settings": "copyFiles -u 1 main/function.json dist/main/",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

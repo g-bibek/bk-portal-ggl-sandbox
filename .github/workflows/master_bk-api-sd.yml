@@ -25,13 +25,13 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-#       - name: 'Create env file'
-#         shell: bash
-#         run: |
-#           touch .env
-#           echo ${{secrets}}
-#           echo ${{ secrets.PROD }} | base64 --decode > echo  .env 
-#           cat .env
+      #       - name: 'Create env file'
+      #         shell: bash
+      #         run: |
+      #           touch .env
+      #           echo ${{secrets}}
+      #           echo ${{ secrets.PROD }} | base64 --decode > echo  .env
+      #           cat .env
 
       - name: 'Resolve Project Dependencies Using Npm'
         shell: bash
@@ -48,17 +48,18 @@ jobs:
         run: |
           cat main/function.json
           cp main/function.json dist/main/function.json
-          
-       # You can also make use of a ZIP GitHub Action
-      - name: "Create ZIP"
+          cat dist/main/functions.json
+
+        # You can also make use of a ZIP GitHub Action
+      - name: 'Create ZIP'
         run: |
           Get-ChildItem $pwd | Compress-Archive -Destination .\backend.zip
         shell: pwsh
-      
+
       - name: File Size
         run: |
-            FILESIZE=$(ls -lah backend.zip | awk '{ print $5}')
-            echo "Filesize is $FILESIZE"
+          FILESIZE=$(ls -lah backend.zip | awk '{ print $5}')
+          echo "Filesize is $FILESIZE"
 
       - name: 'Deploy the ZIP to the app'
         uses: azure/webapps-deploy@v2
@@ -66,7 +67,6 @@ jobs:
           app-name: 'bk-api-sd'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AF9A258D91BE4A2F99245511FD469C13  }}
           package: ./backend.zip
-
 #       - name: 'Run Azure Functions Action'
 #         uses: Azure/functions-action@v1
 #         id: fa
