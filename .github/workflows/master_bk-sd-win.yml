@@ -28,7 +28,7 @@ jobs:
       - name: 'Create .Env File'
         shell: pwsh
         run: |
-          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(${{secrets.SOME_ENCODED_STRING}})) | Out-File -FilePath .env                  
+          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(${{secrets.PROD}})) | Out-File -FilePath .env                  
           get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
