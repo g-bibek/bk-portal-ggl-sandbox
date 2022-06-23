@@ -25,12 +25,21 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           
-      - name: 'Create .Env File'
-        shell: pwsh
+      - name: 'Create env file'
+        shell: bash
         run: |
-          echo "$env:PRODWIN"
-          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$env:PRODWIN")) | Out-File -FilePath .env                  
-          get-content .env
+          touch .env
+          echo ${{secrets}}
+          echo ${{ secrets.PROD }} | base64 --decode > echo  .env
+          echo "======== env file created ========"
+          cat .env
+          
+#       - name: 'Create .Env File'
+#         shell: pwsh
+#         run: |
+#           echo "$env:PRODWIN"
+#           [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$env:PRODWIN")) | Out-File -FilePath .env                  
+#           get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
         shell: pwsh
