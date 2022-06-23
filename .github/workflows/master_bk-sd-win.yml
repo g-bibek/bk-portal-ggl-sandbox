@@ -46,6 +46,8 @@ jobs:
 #           get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         shell: pwsh
         run: |
           pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
