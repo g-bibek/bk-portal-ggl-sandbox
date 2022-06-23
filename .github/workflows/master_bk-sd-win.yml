@@ -27,9 +27,11 @@ jobs:
           
       - name: 'Create .Env File'
         shell: pwsh
+        env:
+          SUPER_SECRET: ${{ secrets.PROD }}
         run: |
-          Write-Output ${{ secrets.PROD }}
-          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String(${{ secrets.PROD }})) | Out-File -FilePath .env                  
+          Write-Output "$env:SUPER_SECRET"
+          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("$env:SUPER_SECRET")) | Out-File -FilePath .env                  
           get-content .env
 
       - name: 'Resolve Project Dependencies Using Npm'
